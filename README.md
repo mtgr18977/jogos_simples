@@ -3,9 +3,9 @@
 Este repositório contém uma coleção de jogos clássicos desenvolvidos em HTML5 e JavaScript. por enquanto, os jogos incluem Tetris e Pong. A página principal permite ao usuário escolher o jogo e acessar uma seção de ajuda para instruções de cada um.
 Conteúdo
 
-- index.html: Página inicial onde o usuário pode selecionar o jogo que deseja jogar.
-- tetris.html: Implementação do jogo Tetris com diversas funcionalidades, como seleção de modo de jogo, placar, nível, e ranking de pontuação.
-_ pong.html: Implementação do jogo Pong, onde o usuário pode ajustar a dificuldade e competir contra uma IA.
+- `index.html`: Página inicial onde o usuário pode selecionar o jogo que deseja jogar.
+- `tetris.html`: Implementação do jogo Tetris com diversas funcionalidades, como seleção de modo de jogo, placar, nível, e ranking de pontuação.
+- `pong.html`: Implementação do jogo Pong, onde o usuário pode ajustar a dificuldade e competir contra uma IA.
 
 ## Recursos
 
