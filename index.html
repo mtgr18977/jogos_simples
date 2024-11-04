@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escolha seu Jogo</title>
+    <style>
+        /* Reset básico para remover margens e paddings padrões */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Estilo do corpo da página */
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #fff;
+        }
+
+        /* Container centralizado */
+        .container {
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            max-width: 800px;
+            width: 90%;
+        }
+
+        /* Título principal */
+        h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        /* Subtítulo */
+        p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            color: #ddd;
+        }
+
+        /* Estilo dos botões */
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .game-button, .help-button {
+            background-color: #4e54c8;
+            border: none;
+            padding: 15px 30px;
+            font-size: 20px;
+            color: #fff;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .game-button:hover, .help-button:hover {
+            background-color: #8f94fb;
+            transform: translateY(-3px);
+        }
+
+        .game-button:active, .help-button:active {
+            transform: translateY(0);
+            background-color: #6b7cd4;
+        }
+
+        /* Seções de Ajuda */
+        .help-section {
+            display: none;
+            margin-top: 30px;
+            text-align: left;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            transition: max-height 0.5s ease-out, opacity 0.5s ease-out;
+            overflow: hidden;
+        }
+
+        .help-section.active {
+            display: block;
+        }
+
+        .help-section h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #f0f0f0;
+        }
+
+        .help-section p, .help-section ul {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #ddd;
+        }
+
+        .help-section ul {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 10px;
+        }
+
+        .help-section ul li {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+
+        .help-section ul li i {
+            margin-right: 10px;
+            background-color: #444;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-style: normal;
+            width: 40px;
+            text-align: center;
+        }
+
+        /* Botão de retorno dentro da ajuda */
+        .close-button {
+            background-color: #ff4e4e;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            margin-top: 20px;
+        }
+
+        .close-button:hover {
+            background-color: #ff8f8f;
+            transform: translateY(-2px);
+        }
+
+        .close-button:active {
+            transform: translateY(0);
+            background-color: #ff6b6b;
+        }
+
+        /* Responsividade para telas menores */
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 32px;
+            }
+
+            .game-button, .help-button {
+                padding: 10px 20px;
+                font-size: 16px;
+            }
+
+            .help-section h2 {
+                font-size: 20px;
+            }
+
+            .help-section p, .help-section ul li {
+                font-size: 14px;
+            }
+
+            .close-button {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Bem-vindo aos Jogos</h1>
+        <p>Escolha seu favorito para começar a jogar!</p>
+        <div class="button-group">
+            <!-- Tetris -->
+            <div>
+                <a href="tetris.html" class="game-button">Tetris</a>
+                <button class="help-button" onclick="toggleHelp('tetris-help')">Ajuda Tetris</button>
+                <div id="tetris-help" class="help-section">
+                    <h2>Ajuda - Tetris</h2>
+                    <div>
+                        <p><strong>Objetivo do Jogo:</strong></p>
+                        <p>
+                            O objetivo do Tetris é encaixar as peças (Tetrominos) que caem no campo de jogo de forma que completem linhas horizontais sem espaços vazios. Cada linha completa é removida, e o jogador ganha pontos. O jogo termina quando as peças alcançam o topo do campo.
+                        </p>
+                    </div>
+                    <div>
+                        <p><strong>Controles:</strong></p>
+                        <ul>
+                            <li><i>←</i> Mover Peça para a Esquerda</li>
+                            <li><i>→</i> Mover Peça para a Direita</li>
+                            <li><i>↓</i> Acelerar a Queda da Peça</li>
+                            <li><i>↑</i> Rotacionar a Peça no Sentido Horário</li>
+                            <li><i>Q</i> Rotacionar a Peça no Sentido Anti-Horário</li>
+                            <li><i>Espaço</i> Pausar/Jogar</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p><strong>Como Jogar:</strong></p>
+                        <p>
+                            - As peças caem automaticamente do topo do campo. Use as setas do teclado para mover as peças para a esquerda ou direita e a seta para baixo para acelerar a queda.
+                            <br><br>
+                            - Pressione a seta para cima ou a tecla `↑` para rotacionar a peça no sentido horário e a tecla `Q` para rotacioná-la no sentido anti-horário.
+                            <br><br>
+                            - Complete linhas horizontais sem espaços vazios para removê-las do campo e ganhar pontos.
+                            <br><br>
+                            - O jogo aumenta de velocidade à medida que você avança nos níveis, tornando as peças caindo mais rápido.
+                            <br><br>
+                            - O jogo termina quando uma nova peça não pode ser colocada no campo sem colidir com as peças existentes.
+                        </p>
+                    </div>
+                    <div>
+                        <p><strong>Dicas:</strong></p>
+                        <p>
+                            - <strong>Planejamento Estratégico:</strong> Observe as próximas peças para planejar onde encaixá-las melhor.
+                            <br><br>
+                            - <strong>Mantenha o Campo Limpo:</strong> Evite acumular peças em um lado do campo; tente manter uma superfície plana.
+                            <br><br>
+                            - <strong>Rotacione com Sabedoria:</strong> Use as rotações para encaixar peças em espaços apertados ou para completar múltiplas linhas de uma vez.
+                            <br><br>
+                            - <strong>Controle a Velocidade:</strong> Use a aceleração para rapidamente limpar linhas durante momentos críticos.
+                        </p>
+                    </div>
+                    <button class="close-button" onclick="toggleHelp('tetris-help')">Fechar</button>
+                </div>
+            </div>
+
+            <!-- Pong -->
+            <div>
+                <a href="pong.html" class="game-button">Pong</a>
+                <button class="help-button" onclick="toggleHelp('pong-help')">Ajuda Pong</button>
+                <div id="pong-help" class="help-section">
+                    <h2>Ajuda - Pong</h2>
+                    <div>
+                        <p><strong>Objetivo do Jogo:</strong></p>
+                        <p>
+                            O objetivo do Pong é simples: manter a bola em movimento e evitar que ela passe pela sua barra. Você compete contra a IA tentando marcar mais pontos do que ela.
+                        </p>
+                    </div>
+                    <div>
+                        <p><strong>Controles:</strong></p>
+                        <ul>
+                            <li><i>↑</i> Mover Barra para Cima</li>
+                            <li><i>↓</i> Mover Barra para Baixo</li>
+                            <li><i>Espaço</i> Pausar/Jogar</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p><strong>Como Jogar:</strong></p>
+                        <p>
+                            - A bola se move automaticamente pelo campo. Use as setas para cima e para baixo para mover sua barra e impedir que a bola passe.
+                            <br><br>
+                            - Quando a bola colide com sua barra ou com as paredes superiores e inferiores, ela muda de direção.
+                            <br><br>
+                            - Cada vez que você consegue rebater a bola, seu placar aumenta em um ponto. Se a bola passar pela sua barra, a IA marca um ponto.
+                            <br><br>
+                            - O jogo termina quando um dos jogadores atinge a pontuação máxima definida. O jogo também pode ser pausado pressionando a barra de espaço.
+                        </p>
+                    </div>
+                    <div>
+                        <p><strong>Dicas:</strong></p>
+                        <p>
+                            - <strong>Mantenha sua Barra Centralizada:</strong> Isso permite que você tenha um melhor alcance para rebater a bola.
+                            <br><br>
+                            - <strong>Observe o Movimento da Bola:</strong> Antecipe a direção da bola para posicionar sua barra de forma proativa.
+                            <br><br>
+                            - <strong>Controle a Velocidade:</strong> Use a aceleração para rapidamente rebater a bola em momentos críticos.
+                            <br><br>
+                            - <strong>Pratique Reflexos:</strong> Nos modos mais difíceis, a IA pode ser mais rápida e imprevisível. Melhorar sua reflexividade é essencial.
+                        </p>
+                    </div>
+                    <button class="close-button" onclick="toggleHelp('pong-help')">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script>
+        // Função para alternar a exibição das seções de ajuda
+        function toggleHelp(id) {
+            const helpSection = document.getElementById(id);
+            if (helpSection.classList.contains('active')) {
+                helpSection.classList.remove('active');
+            } else {
+                // Fecha todas as seções de ajuda antes de abrir uma nova
+                const allHelpSections = document.querySelectorAll('.help-section');
+                allHelpSections.forEach(section => section.classList.remove('active'));
+                // Abre a seção de ajuda selecionada
+                helpSection.classList.add('active');
+                // Scroll para a seção de ajuda
+                helpSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    </script>
+</html>

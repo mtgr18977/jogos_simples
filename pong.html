@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pong Game com Placar e Dificuldade</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        #controls {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        canvas {
+            border: 2px solid white;
+        }
+    </style>
+</head>
+<body>
+    <div id="controls">
+        <label for="difficulty">Selecione a Dificuldade:</label>
+        <select id="difficulty">
+            <option value="easy">Fácil</option>
+            <option value="normal" selected>Normal</option>
+            <option value="hard">Difícil</option>
+        </select>
+        <button id="startButton">Iniciar Jogo</button>
+    </div>
+    <canvas id="pongCanvas" width="800" height="500" style="display: none;"></canvas>
+    <script>
+        const canvas = document.getElementById('pongCanvas');
+        const ctx = canvas.getContext('2d');
+        const difficultySelector = document.getElementById('difficulty');
+        const startButton = document.getElementById('startButton');
+        const controlsDiv = document.getElementById('controls');
+
+        // Define paddles e bola
+        const paddleWidth = 10;
+        const paddleHeight = 100;
+        const ballRadius = 10;
+
+        const playerPaddle = { x: 10, y: canvas.height / 2 - paddleHeight / 2, dy: 0 };
+        const aiPaddle = { x: canvas.width - paddleWidth - 10, y: canvas.height / 2 - paddleHeight / 2, dy: 4 };
+        const ball = { x: canvas.width / 2, y: canvas.height / 2, dx: 4, dy: 4 };
+
+        // Variáveis de pontuação
+        let playerScore = 0;
+        let aiScore = 0;
+
+        // Variáveis de dificuldade
+        let aiSpeed = 4; // Valor padrão para "Normal"
+
+        // Event listeners para movimento da paddle do jogador
+        window.addEventListener('keydown', (event) => {
+            if (event.key === 'ArrowUp') playerPaddle.dy = -6;
+            if (event.key === 'ArrowDown') playerPaddle.dy = 6;
+        });
+
+        window.addEventListener('keyup', (event) => {
+            if (event.key === 'ArrowUp' || event.key === 'ArrowDown') playerPaddle.dy = 0;
+        });
+
+        // Função para ajustar a velocidade da IA com base na dificuldade
+        function setDifficulty(level) {
+            switch(level) {
+                case 'easy':
+                    aiSpeed = 3; // Menor velocidade para IA fácil
+                    break;
+                case 'normal':
+                    aiSpeed = 4; // Velocidade padrão
+                    break;
+                case 'hard':
+                    aiSpeed = 6; // Maior velocidade para IA difícil
+                    break;
+                default:
+                    aiSpeed = 4;
+            }
+            aiPaddle.dy = aiSpeed;
+        }
+
+        // Função para iniciar o jogo
+        function startGame() {
+            // Esconde os controles e mostra o canvas
+            controlsDiv.style.display = 'none';
+            canvas.style.display = 'block';
+
+            // Reseta pontuação
+            playerScore = 0;
+            aiScore = 0;
+
+            // Reseta posições
+            playerPaddle.y = canvas.height / 2 - paddleHeight / 2;
+            aiPaddle.y = canvas.height / 2 - paddleHeight / 2;
+            resetBall();
+
+            // Inicia o loop do jogo
+            requestAnimationFrame(gameLoop);
+        }
+
+        // Adiciona evento para o botão de iniciar jogo
+        startButton.addEventListener('click', () => {
+            const selectedDifficulty = difficultySelector.value;
+            setDifficulty(selectedDifficulty);
+            startGame();
+        });
+
+        // Função para atualizar o jogo
+        function update() {
+            // Atualiza posição da paddle do jogador
+            playerPaddle.y += playerPaddle.dy;
+            if (playerPaddle.y < 0) playerPaddle.y = 0;
+            if (playerPaddle.y > canvas.height - paddleHeight) playerPaddle.y = canvas.height - paddleHeight;
+
+            // Atualiza posição da paddle da IA
+            if (ball.y < aiPaddle.y + paddleHeight / 2) {
+                aiPaddle.y -= aiSpeed;
+            }
+            if (ball.y > aiPaddle.y + paddleHeight / 2) {
+                aiPaddle.y += aiSpeed;
+            }
+            if (aiPaddle.y < 0) aiPaddle.y = 0;
+            if (aiPaddle.y > canvas.height - paddleHeight) aiPaddle.y = canvas.height - paddleHeight;
+
+            // Atualiza posição da bola
+            ball.x += ball.dx;
+            ball.y += ball.dy;
+
+            // Colisão da bola com as paredes superior e inferior
+            if (ball.y - ballRadius < 0 || ball.y + ballRadius > canvas.height) {
+                ball.dy *= -1;
+            }
+
+            // Colisão da bola com as paddles
+            if (ball.x - ballRadius < playerPaddle.x + paddleWidth &&
+                ball.y > playerPaddle.y &&
+                ball.y < playerPaddle.y + paddleHeight) {
+                ball.dx *= -1;
+                ball.x = playerPaddle.x + paddleWidth + ballRadius; // Evita que a bola fique presa na paddle
+            }
+
+            if (ball.x + ballRadius > aiPaddle.x &&
+                ball.y > aiPaddle.y &&
+                ball.y < aiPaddle.y + paddleHeight) {
+                ball.dx *= -1;
+                ball.x = aiPaddle.x - ballRadius; // Evita que a bola fique presa na paddle
+            }
+
+            // Verifica se a bola saiu dos limites (pontuação)
+            if (ball.x - ballRadius < 0) {
+                aiScore++;
+                resetBall();
+            }
+
+            if (ball.x + ballRadius > canvas.width) {
+                playerScore++;
+                resetBall();
+            }
+        }
+
+        // Função para desenhar os elementos do jogo
+        function draw() {
+            // Limpa o canvas
+            ctx.fillStyle = 'black';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Desenha a paddle do jogador
+            ctx.fillStyle = 'white';
+            ctx.fillRect(playerPaddle.x, playerPaddle.y, paddleWidth, paddleHeight);
+
+            // Desenha a paddle da IA
+            ctx.fillStyle = 'white';
+            ctx.fillRect(aiPaddle.x, aiPaddle.y, paddleWidth, paddleHeight);
+
+            // Desenha a bola
+            ctx.beginPath();
+            ctx.arc(ball.x, ball.y, ballRadius, 0, Math.PI * 2);
+            ctx.fillStyle = 'white';
+            ctx.fill();
+            ctx.closePath();
+
+            // Desenha o placar
+            ctx.font = '30px Arial';
+            ctx.fillStyle = 'white';
+            ctx.textAlign = 'center';
+            ctx.fillText(`${playerScore} : ${aiScore}`, canvas.width / 2, 50);
+        }
+
+        // Função para reiniciar a bola após pontuação
+        function resetBall() {
+            ball.x = canvas.width / 2;
+            ball.y = canvas.height / 2;
+            ball.dx = -ball.dx; // Inverte a direção da bola
+            ball.dy = 4 * (Math.random() > 0.5 ? 1 : -1); // Direção vertical aleatória
+        }
+
+        // Loop principal do jogo
+        function gameLoop() {
+            update();
+            draw();
+            requestAnimationFrame(gameLoop);
+        }
+
+        // Inicialmente, exibe os controles e esconde o canvas
+        canvas.style.display = 'none';
+    </script>
+</body>
+</html>
