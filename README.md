@@ -6,6 +6,7 @@ Conteúdo
 - `index.html`: Página inicial onde o usuário pode selecionar o jogo que deseja jogar.
 - `tetris.html`: Implementação do jogo Tetris com diversas funcionalidades, como seleção de modo de jogo, placar, nível, e ranking de pontuação.
 - `pong.html`: Implementação do jogo Pong, onde o usuário pode ajustar a dificuldade e competir contra uma IA.
+- `enduro/game.js`: Implementação muito básica do jogo Enduro, famoso no Atari2600.
 
 ## Recursos
 
@@ -24,6 +25,11 @@ Conteúdo
 - Jogo contra IA com níveis de dificuldade.
 - Placar em tempo real.
 - Controles: Setas para mover a barra e Espaço para pausar.
+
+### Enduro (enduro/game.js)
+- Jogo infinito.
+- Scroller com diversos blocos, você controla o bloco que se mexe.
+- Controles: setas para direita/esquerda para movimentar/desviar dos carros.
 
 ## Como Executar
 - Baixe ou clone o repositório.
@@ -45,3 +51,7 @@ Conteúdo
 ### Pong
 - Mover Barra: Setas ↑ e ↓
 - Pausar: Espaço
+
+### Enduro
+- Desviar dos carros: Setas ← e →
+- Pausar: Espaço.
