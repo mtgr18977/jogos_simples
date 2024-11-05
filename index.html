@@ -53,9 +53,19 @@
         /* Estilo dos botões */
         .button-group {
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .game-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             gap: 20px;
             flex-wrap: wrap;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
         }
 
         .game-button, .help-button {
@@ -84,9 +94,9 @@
         /* Seções de Ajuda */
         .help-section {
             display: none;
-            margin-top: 30px;
+            margin-top: 20px;
             text-align: left;
-            background-color: rgba(0, 0, 0, 0.7);
+            background-color: rgba(0, 0, 0, 0.8);
             padding: 20px;
             border-radius: 10px;
             transition: max-height 0.5s ease-out, opacity 0.5s ease-out;
@@ -186,111 +196,116 @@
 </head>
 <body>
     <div class="container">
-        <h1>Bem-vindo aos Jogos</h1>
-        <p>Escolha seu favorito para começar a jogar!</p>
+        <h1>Jogos clássicos</h1>
+        <p>Mal feitos e meio bugados. Escolha um.</p>
         <div class="button-group">
             <!-- Tetris -->
-            <div>
+            <div class="game-container">
                 <a href="tetris.html" class="game-button">Tetris</a>
                 <button class="help-button" onclick="toggleHelp('tetris-help')">Ajuda Tetris</button>
                 <div id="tetris-help" class="help-section">
                     <h2>Ajuda - Tetris</h2>
-                    <div>
-                        <p><strong>Objetivo do Jogo:</strong></p>
-                        <p>
-                            O objetivo do Tetris é encaixar as peças (Tetrominos) que caem no campo de jogo de forma que completem linhas horizontais sem espaços vazios. Cada linha completa é removida, e o jogador ganha pontos. O jogo termina quando as peças alcançam o topo do campo.
-                        </p>
-                    </div>
-                    <div>
-                        <p><strong>Controles:</strong></p>
-                        <ul>
-                            <li><i>←</i> Mover Peça para a Esquerda</li>
-                            <li><i>→</i> Mover Peça para a Direita</li>
-                            <li><i>↓</i> Acelerar a Queda da Peça</li>
-                            <li><i>↑</i> Rotacionar a Peça no Sentido Horário</li>
-                            <li><i>Q</i> Rotacionar a Peça no Sentido Anti-Horário</li>
-                            <li><i>Espaço</i> Pausar/Jogar</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <p><strong>Como Jogar:</strong></p>
-                        <p>
-                            - As peças caem automaticamente do topo do campo. Use as setas do teclado para mover as peças para a esquerda ou direita e a seta para baixo para acelerar a queda.
-                            <br><br>
-                            - Pressione a seta para cima ou a tecla `↑` para rotacionar a peça no sentido horário e a tecla `Q` para rotacioná-la no sentido anti-horário.
-                            <br><br>
-                            - Complete linhas horizontais sem espaços vazios para removê-las do campo e ganhar pontos.
-                            <br><br>
-                            - O jogo aumenta de velocidade à medida que você avança nos níveis, tornando as peças caindo mais rápido.
-                            <br><br>
-                            - O jogo termina quando uma nova peça não pode ser colocada no campo sem colidir com as peças existentes.
-                        </p>
-                    </div>
-                    <div>
-                        <p><strong>Dicas:</strong></p>
-                        <p>
-                            - <strong>Planejamento Estratégico:</strong> Observe as próximas peças para planejar onde encaixá-las melhor.
-                            <br><br>
-                            - <strong>Mantenha o Campo Limpo:</strong> Evite acumular peças em um lado do campo; tente manter uma superfície plana.
-                            <br><br>
-                            - <strong>Rotacione com Sabedoria:</strong> Use as rotações para encaixar peças em espaços apertados ou para completar múltiplas linhas de uma vez.
-                            <br><br>
-                            - <strong>Controle a Velocidade:</strong> Use a aceleração para rapidamente limpar linhas durante momentos críticos.
-                        </p>
-                    </div>
+                    <p><strong>Objetivo do Jogo:</strong></p>
+                    <p>
+                        O objetivo do Tetris é encaixar as peças (Tetrominos) que caem no campo de jogo de forma que completem linhas horizontais sem espaços vazios. Cada linha completa é removida, e o jogador ganha pontos. O jogo termina quando as peças alcançam o topo do campo.
+                    </p>
+                    <p><strong>Controles:</strong></p>
+                    <ul>
+                        <li><i>←</i> Mover Peça para a Esquerda</li>
+                        <li><i>→</i> Mover Peça para a Direita</li>
+                        <li><i>↓</i> Acelerar a Queda da Peça</li>
+                        <li><i>↑</i> Rotacionar a Peça no Sentido Horário</li>
+                        <li><i>Q</i> Rotacionar a Peça no Sentido Anti-Horário</li>
+                        <li><i>Espaço</i> Pausar/Jogar</li>
+                    </ul>
+                    <p><strong>Como Jogar:</strong></p>
+                    <p>
+                        - As peças caem automaticamente do topo do campo. Use as setas do teclado para mover as peças para a esquerda ou direita e a seta para baixo para acelerar a queda.<br><br>
+                        - Pressione a seta para cima ou a tecla `↑` para rotacionar a peça no sentido horário e a tecla `Q` para rotacioná-la no sentido anti-horário.<br><br>
+                        - Complete linhas horizontais sem espaços vazios para removê-las do campo e ganhar pontos.<br><br>
+                        - O jogo aumenta de velocidade à medida que você avança nos níveis, tornando as peças caindo mais rápido.<br><br>
+                        - O jogo termina quando uma nova peça não pode ser colocada no campo sem colidir com as peças existentes.
+                    </p>
+                    <p><strong>Dicas:</strong></p>
+                    <p>
+                        - <strong>Planejamento Estratégico:</strong> Observe as próximas peças para planejar onde encaixá-las melhor.<br><br>
+                        - <strong>Mantenha o Campo Limpo:</strong> Evite acumular peças em um lado do campo; tente manter uma superfície plana.<br><br>
+                        - <strong>Rotacione com Sabedoria:</strong> Use as rotações para encaixar peças em espaços apertados ou para completar múltiplas linhas de uma vez.<br><br>
+                        - <strong>Controle a Velocidade:</strong> Use a aceleração para rapidamente limpar linhas durante momentos críticos.
+                    </p>
                     <button class="close-button" onclick="toggleHelp('tetris-help')">Fechar</button>
                 </div>
             </div>
 
             <!-- Pong -->
-            <div>
+            <div class="game-container">
                 <a href="pong.html" class="game-button">Pong</a>
                 <button class="help-button" onclick="toggleHelp('pong-help')">Ajuda Pong</button>
                 <div id="pong-help" class="help-section">
                     <h2>Ajuda - Pong</h2>
-                    <div>
-                        <p><strong>Objetivo do Jogo:</strong></p>
-                        <p>
-                            O objetivo do Pong é simples: manter a bola em movimento e evitar que ela passe pela sua barra. Você compete contra a IA tentando marcar mais pontos do que ela.
-                        </p>
-                    </div>
-                    <div>
-                        <p><strong>Controles:</strong></p>
-                        <ul>
-                            <li><i>↑</i> Mover Barra para Cima</li>
-                            <li><i>↓</i> Mover Barra para Baixo</li>
-                            <li><i>Espaço</i> Pausar/Jogar</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <p><strong>Como Jogar:</strong></p>
-                        <p>
-                            - A bola se move automaticamente pelo campo. Use as setas para cima e para baixo para mover sua barra e impedir que a bola passe.
-                            <br><br>
-                            - Quando a bola colide com sua barra ou com as paredes superiores e inferiores, ela muda de direção.
-                            <br><br>
-                            - Cada vez que você consegue rebater a bola, seu placar aumenta em um ponto. Se a bola passar pela sua barra, a IA marca um ponto.
-                            <br><br>
-                            - O jogo termina quando um dos jogadores atinge a pontuação máxima definida. O jogo também pode ser pausado pressionando a barra de espaço.
-                        </p>
-                    </div>
-                    <div>
-                        <p><strong>Dicas:</strong></p>
-                        <p>
-                            - <strong>Mantenha sua Barra Centralizada:</strong> Isso permite que você tenha um melhor alcance para rebater a bola.
-                            <br><br>
-                            - <strong>Observe o Movimento da Bola:</strong> Antecipe a direção da bola para posicionar sua barra de forma proativa.
-                            <br><br>
-                            - <strong>Controle a Velocidade:</strong> Use a aceleração para rapidamente rebater a bola em momentos críticos.
-                            <br><br>
-                            - <strong>Pratique Reflexos:</strong> Nos modos mais difíceis, a IA pode ser mais rápida e imprevisível. Melhorar sua reflexividade é essencial.
-                        </p>
-                    </div>
+                    <p><strong>Objetivo do Jogo:</strong></p>
+                    <p>
+                        O objetivo do Pong é simples: manter a bola em movimento e evitar que ela passe pela sua barra. Você compete contra a IA tentando marcar mais pontos do que ela.
+                    </p>
+                    <p><strong>Controles:</strong></p>
+                    <ul>
+                        <li><i>↑</i> Mover Barra para Cima</li>
+                        <li><i>↓</i> Mover Barra para Baixo</li>
+                        <li><i>Espaço</i> Pausar/Jogar</li>
+                    </ul>
+                    <p><strong>Como Jogar:</strong></p>
+                    <p>
+                        - A bola se move automaticamente pelo campo. Use as setas para cima e para baixo para mover sua barra e impedir que a bola passe.<br><br>
+                        - Quando a bola colide com sua barra ou com as paredes superiores e inferiores, ela muda de direção.<br><br>
+                        - Cada vez que você consegue rebater a bola, seu placar aumenta em um ponto. Se a bola passar pela sua barra, a IA marca um ponto.<br><br>
+                        - O jogo termina quando um dos jogadores atinge a pontuação máxima definida. O jogo também pode ser pausado pressionando a barra de espaço.
+                    </p>
+                    <p><strong>Dicas:</strong></p>
+                    <p>
+                        - <strong>Mantenha sua Barra Centralizada:</strong> Isso permite que você tenha um melhor alcance para rebater a bola.<br><br>
+                        - <strong>Observe o Movimento da Bola:</strong> Antecipe a direção da bola para posicionar sua barra de forma proativa.<br><br>
+                        - <strong>Controle a Velocidade:</strong> Use a aceleração para rapidamente rebater a bola em momentos críticos.<br><br>
+                        - <strong>Pratique Reflexos:</strong> Nos modos mais difíceis, a IA pode ser mais rápida e imprevisível. Melhorar sua reflexividade é essencial.
+                    </p>
                     <button class="close-button" onclick="toggleHelp('pong-help')">Fechar</button>
                 </div>
             </div>
+
+            <!-- Enduro -->
+            <div class="game-container">
+                <a href="enduro/index.html" class="game-button">Enduro</a>
+                <button class="help-button" onclick="toggleHelp('enduro-help')">Ajuda Enduro</button>
+                <div id="enduro-help" class="help-section">
+                    <h2>Ajuda - Enduro</h2>
+                    <p><strong>Objetivo do Jogo:</strong></p>
+                    <p>
+                        O objetivo do Enduro é dirigir o seu carro por uma longa estrada, ultrapassando o maior número possível de carros antes que o tempo acabe. Você passará por diferentes condições climáticas, como neve e neblina, que dificultam a visibilidade e exigem habilidade de condução.
+                    </p>
+                    <p><strong>Controles:</strong></p>
+                    <ul>
+                        <li><i>←</i> Mover Carro para a Esquerda</li>
+                        <li><i>→</i> Mover Carro para a Direita</li>
+                        <li><i>↑</i> Acelerar</li>
+                        <li><i>↓</i> Reduzir Velocidade</li>
+                    </ul>
+                    <p><strong>Como Jogar:</strong></p>
+                    <p>
+                        - Dirija pela estrada e ultrapasse os carros que estão à sua frente.<br><br>
+                        - Use as setas para a esquerda e direita para mover o carro pela pista.<br><br>
+                        - Utilize a seta para cima para acelerar e a seta para baixo para reduzir a velocidade.<br><br>
+                        - Cuidado com as diferentes condições climáticas que dificultam a visibilidade e exigem uma direção cuidadosa.
+                    </p>
+                    <p><strong>Dicas:</strong></p>
+                    <p>
+                        - <strong>Mantenha-se na Pista:</strong> Tente manter o controle do carro mesmo nas curvas para evitar colisões.<br><br>
+                        - <strong>Condições Climáticas:</strong> Adapte sua velocidade e posicionamento na estrada conforme as condições climáticas mudarem.<br><br>
+                        - <strong>Anticipe os Movimentos dos Outros Carros:</strong> Preste atenção no movimento dos carros à sua frente para evitar acidentes.
+                    </p>
+                    <button class="close-button" onclick="toggleHelp('enduro-help')">Fechar</button>
+                </div>
+            </div>
         </div>
-    </body>
+    </div>
     <script>
         // Função para alternar a exibição das seções de ajuda
         function toggleHelp(id) {
@@ -308,4 +323,5 @@
             }
         }
     </script>
+</body>
 </html>

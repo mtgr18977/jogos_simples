@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Ajuda - Tetris</title>
+    <style>
+        /* Reset básico para remover margens e paddings padrões */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Estilo do corpo da página */
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #fff;
+        }
+
+        /* Container centralizado */
+        .container {
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            max-width: 700px;
+            width: 90%;
+        }
+
+        /* Título principal */
+        h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        /* Seções de ajuda */
+        .section {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .section h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #f0f0f0;
+        }
+
+        .section p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #ddd;
+        }
+
+        /* Lista de controles */
+        .controls-list {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 10px;
+        }
+
+        .controls-list li {
+            margin-bottom: 8px;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+        }
+
+        .controls-list li i {
+            margin-right: 10px;
+            background-color: #444;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-style: normal;
+            width: 40px;
+            text-align: center;
+        }
+
+        /* Botão de retorno */
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .back-button {
+            background-color: #4e54c8;
+            border: none;
+            padding: 12px 30px;
+            font-size: 18px;
+            color: #fff;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .back-button:hover {
+            background-color: #8f94fb;
+            transform: translateY(-3px);
+        }
+
+        .back-button:active {
+            transform: translateY(0);
+            background-color: #6b7cd4;
+        }
+
+        /* Responsividade para telas menores */
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            .section h2 {
+                font-size: 20px;
+            }
+
+            .section p, .controls-list li {
+                font-size: 14px;
+            }
+
+            .back-button {
+                padding: 10px 20px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Ajuda - Tetris</h1>
+        
+        <div class="section">
+            <h2>Objetivo do Jogo</h2>
+            <p>
+                O objetivo do Tetris é encaixar as peças (Tetrominos) que caem no campo de jogo de forma que completem linhas horizontais sem espaços vazios. Cada linha completa é removida, e o jogador ganha pontos. O jogo termina quando as peças alcançam o topo do campo.
+            </p>
+        </div>
+
+        <div class="section">
+            <h2>Controles</h2>
+            <ul class="controls-list">
+                <li><i>←</i> Mover Peça para a Esquerda</li>
+                <li><i>→</i> Mover Peça para a Direita</li>
+                <li><i>↓</i> Acelerar a Queda da Peça</li>
+                <li><i>↑</i> Rotacionar a Peça no Sentido Horário</li>
+                <li><i>Q</i> Rotacionar a Peça no Sentido Anti-Horário</li>
+                <li><i>Espaço</i> Pausar/Jogar</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Como Jogar</h2>
+            <p>
+                - As peças caem automaticamente do topo do campo. Use as setas do teclado para mover as peças para a esquerda ou direita e a seta para baixo para acelerar a queda.
+                <br><br>
+                - Pressione a seta para cima ou a tecla `↑` para rotacionar a peça no sentido horário e a tecla `Q` para rotacioná-la no sentido anti-horário.
+                <br><br>
+                - Complete linhas horizontais sem espaços vazios para removê-las do campo e ganhar pontos.
+                <br><br>
+                - O jogo aumenta de velocidade à medida que você avança nos níveis, tornando as peças caindo mais rápido.
+                <br><br>
+                - O jogo termina quando uma nova peça não pode ser colocada no campo sem colidir com as peças existentes.
+            </p>
+        </div>
+
+        <div class="section">
+            <h2>Dicas</h2>
+            <p>
+                - **Planejamento Estratégico:** Observe as próximas peças para planejar onde encaixá-las melhor.
+                <br><br>
+                - **Mantenha o Campo Limpo:** Evite acumular peças em um lado do campo; tente manter uma superfície plana.
+                <br><br>
+                - **Rotacione com Sabedoria:** Use as rotações para encaixar peças em espaços apertados ou para completar múltiplas linhas de uma vez.
+                <br><br>
+                - **Controle a Velocidade:** Use a aceleração para rapidamente limpar linhas durante momentos críticos.
+            </p>
+        </div>
+
+        <div class="button-group">
+            <a href="index.html" class="back-button">Voltar ao Menu</a>
+        </div>
+    </div>
+</body>
+</html>
