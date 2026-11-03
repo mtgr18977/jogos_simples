@@ -137,8 +137,9 @@
             padding: 5px 10px;
             border-radius: 5px;
             font-style: normal;
-            width: 40px;
+            min-width: 40px;
             text-align: center;
+            white-space: nowrap;
         }
 
         /* Botão de retorno dentro da ajuda */
@@ -197,7 +198,7 @@
 <body>
     <div class="container">
         <h1>Jogos clássicos</h1>
-        <p>Mal feitos e meio bugados. Escolha um.</p>
+        <p>Escolha um jogo e divirta-se. Em qualquer jogo, <b>M</b> liga/desliga o som.</p>
         <div class="button-group">
             <!-- Tetris -->
             <div class="game-container">
@@ -216,7 +217,9 @@
                         <li><i>↓</i> Acelerar a Queda da Peça</li>
                         <li><i>↑</i> Rotacionar a Peça no Sentido Horário</li>
                         <li><i>Q</i> Rotacionar a Peça no Sentido Anti-Horário</li>
-                        <li><i>Espaço</i> Pausar/Jogar</li>
+                        <li><i>Espaço</i> Queda rápida</li>
+                        <li><i>C</i> Guardar peça</li>
+                        <li><i>P</i> Pausar/Continuar</li>
                     </ul>
                     <p><strong>Como Jogar:</strong></p>
                     <p>
@@ -224,7 +227,7 @@
                         - Pressione a seta para cima ou a tecla `↑` para rotacionar a peça no sentido horário e a tecla `Q` para rotacioná-la no sentido anti-horário.<br><br>
                         - Complete linhas horizontais sem espaços vazios para removê-las do campo e ganhar pontos.<br><br>
                         - O jogo aumenta de velocidade à medida que você avança nos níveis, tornando as peças caindo mais rápido.<br><br>
-                        - O jogo termina quando uma nova peça não pode ser colocada no campo sem colidir com as peças existentes.
+                        - O jogo termina quando uma nova peça não cabe no campo. Modos: Clássico (sem limite), Tempo (2 minutos) e Desafio (limpe 20 linhas começando com lixo). O ranking Top 5 é salvo por modo.
                     </p>
                     <p><strong>Dicas:</strong></p>
                     <p>
@@ -247,18 +250,19 @@
                     <p>
                         O objetivo do Pong é simples: manter a bola em movimento e evitar que ela passe pela sua barra. Você compete contra a IA tentando marcar mais pontos do que ela.
                     </p>
-                    <p><strong>Controles:</strong></p>
+                    <p><strong>Controles (1 jogador):</strong></p>
                     <ul>
                         <li><i>↑</i> Mover Barra para Cima</li>
                         <li><i>↓</i> Mover Barra para Baixo</li>
-                        <li><i>Espaço</i> Pausar/Jogar</li>
+                        <li><i>W</i>/<i>S</i> Também movem a barra (no modo 2 jogadores, controlam a barra da esquerda; as setas, a da direita)</li>
+                        <li><i>Espaço</i> Pausar/Continuar</li>
                     </ul>
                     <p><strong>Como Jogar:</strong></p>
                     <p>
                         - A bola se move automaticamente pelo campo. Use as setas para cima e para baixo para mover sua barra e impedir que a bola passe.<br><br>
                         - Quando a bola colide com sua barra ou com as paredes superiores e inferiores, ela muda de direção.<br><br>
-                        - Cada vez que você consegue rebater a bola, seu placar aumenta em um ponto. Se a bola passar pela sua barra, a IA marca um ponto.<br><br>
-                        - O jogo termina quando um dos jogadores atinge a pontuação máxima definida. O jogo também pode ser pausado pressionando a barra de espaço.
+                        - Quem deixa a bola passar dá o ponto ao adversário. O ângulo da rebatida depende de onde a bola toca na barra, e a bola acelera a cada rebatida.<br><br>
+                        - Vence quem atingir primeiro a pontuação escolhida (5, 7 ou 11). Suas vitórias e derrotas ficam salvas por dificuldade.
                     </p>
                     <p><strong>Dicas:</strong></p>
                     <p>
@@ -279,7 +283,7 @@
                     <h2>Ajuda - Enduro</h2>
                     <p><strong>Objetivo do Jogo:</strong></p>
                     <p>
-                        O objetivo do Enduro é dirigir o seu carro por uma longa estrada, ultrapassando o maior número possível de carros antes que o tempo acabe. Você passará por diferentes condições climáticas, como neve e neblina, que dificultam a visibilidade e exigem habilidade de condução.
+                        O objetivo do Enduro é dirigir o seu carro por uma longa estrada, ultrapassando o maior número possível de carros sem bater. Você passará por diferentes condições climáticas, como neve e neblina, que dificultam a visibilidade e exigem habilidade de condução.
                     </p>
                     <p><strong>Controles:</strong></p>
                     <ul>
@@ -287,6 +291,7 @@
                         <li><i>→</i> Mover Carro para a Direita</li>
                         <li><i>↑</i> Acelerar</li>
                         <li><i>↓</i> Reduzir Velocidade</li>
+                        <li><i>Espaço</i> Pausar/Continuar</li>
                     </ul>
                     <p><strong>Como Jogar:</strong></p>
                     <p>
@@ -299,9 +304,33 @@
                     <p>
                         - <strong>Mantenha-se na Pista:</strong> Tente manter o controle do carro mesmo nas curvas para evitar colisões.<br><br>
                         - <strong>Condições Climáticas:</strong> Adapte sua velocidade e posicionamento na estrada conforme as condições climáticas mudarem.<br><br>
-                        - <strong>Anticipe os Movimentos dos Outros Carros:</strong> Preste atenção no movimento dos carros à sua frente para evitar acidentes.
+                        - <strong>Antecipe os Movimentos dos Outros Carros:</strong> Preste atenção no movimento dos carros à sua frente para evitar acidentes.
                     </p>
                     <button class="close-button" onclick="toggleHelp('enduro-help')">Fechar</button>
+                </div>
+            </div>
+
+            <!-- Snake -->
+            <div class="game-container">
+                <a href="snake.html" class="game-button">Snake</a>
+                <button class="help-button" onclick="toggleHelp('snake-help')">Ajuda Snake</button>
+                <div id="snake-help" class="help-section">
+                    <h2>Ajuda - Snake</h2>
+                    <p><strong>Objetivo do Jogo:</strong></p>
+                    <p>Comer o máximo de maçãs possível. A cobra cresce a cada maçã e o jogo acelera. Você perde ao bater em você mesma ou, com paredes sólidas, na borda do tabuleiro.</p>
+                    <p><strong>Controles:</strong></p>
+                    <ul>
+                        <li><i>←↑↓→</i> Mudar de direção</li>
+                        <li><i>WASD</i> Também muda de direção</li>
+                        <li><i>Espaço</i> Pausar/Continuar</li>
+                        <li><i>Enter</i> Reiniciar</li>
+                    </ul>
+                    <p><strong>Dicas:</strong></p>
+                    <p>
+                        - <strong>Faça curvas largas</strong> quando a cobra estiver grande.<br><br>
+                        - <strong>Paredes atravessáveis</strong> deixam o jogo mais fácil, e têm recorde separado.
+                    </p>
+                    <button class="close-button" onclick="toggleHelp('snake-help')">Fechar</button>
                 </div>
             </div>
         </div>
