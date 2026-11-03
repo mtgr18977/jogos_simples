@@ -4,9 +4,10 @@ Este repositório contém uma coleção de jogos clássicos desenvolvidos em HTM
 Conteúdo
 
 - `index.html`: Página inicial onde o usuário pode selecionar o jogo que deseja jogar.
-- `tetris.html`: Implementação do jogo Tetris com diversas funcionalidades, como seleção de modo de jogo, placar, nível, e ranking de pontuação.
+- `tetris.html`: Tetris com 3 modos (Clássico, Tempo, Desafio), peça guardada, sombra, queda rápida, nível e ranking Top 5 por modo.
 - `pong.html`: Implementação do jogo Pong, onde o usuário pode ajustar a dificuldade e competir contra uma IA.
-- `enduro/game.js`: Implementação muito básica do jogo Enduro, famoso no Atari2600.
+- `enduro/`: Enduro (inspirado no Atari 2600) com velocidade, neblina, neve e recorde.
+- `assets/game.css`: estilo compartilhado pelos jogos.
 
 ## Recursos
 
@@ -42,16 +43,20 @@ Conteúdo
 - JavaScript para lógica de jogo e interação.
 
 ## Controles dos Jogos
-### Tetris
-- Mover Esquerda/Direita: Setas ← e →
-- Rotacionar: Seta ↑ para sentido horário, Q para anti-horário
-- Acelerar Queda: Seta ↓
-- Pausar: Espaço
 
-### Pong
-- Mover Barra: Setas ↑ e ↓
-- Pausar: Espaço
+| Jogo | Tecla | Ação |
+|------|-------|------|
+| Tetris | ← → | Mover |
+| Tetris | ↑ / Q | Girar horário / anti-horário |
+| Tetris | ↓ | Descer (1 ponto por célula) |
+| Tetris | Espaço | Queda rápida (2 pontos por célula) |
+| Tetris | C / Shift | Guardar peça |
+| Tetris | P / Esc | Pausar |
+| Pong | ↑ ↓ ou W S | Mover a barra (ou arraste o dedo no celular) |
+| Pong | Espaço / P | Pausar |
+| Enduro | ← → | Desviar |
+| Enduro | ↑ / ↓ | Acelerar / frear |
+| Enduro | Espaço / P | Pausar |
+| Enduro | Enter | Reiniciar |
 
-### Enduro
-- Desviar dos carros: Setas ← e →
-- Pausar: Espaço.
+Os jogos também têm botões de toque em celulares.
