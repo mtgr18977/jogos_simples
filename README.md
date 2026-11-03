@@ -44,7 +44,9 @@ Requer Node 20+ (usa o `node:test` nativo, sem instalar nada).
 
 ## Publicação
 
-Um workflow do GitHub Actions (`.github/workflows/pages.yml`) roda os testes e publica o site no GitHub Pages a cada push na `main`. Para ativar, vá em *Settings → Pages → Source: GitHub Actions*.
+O site é publicado no **Netlify**, que gera um novo deploy a cada push na `main` (e um link de prévia para cada PR). Não há etapa de build: o `netlify.toml` apenas indica a raiz do repositório como pasta publicada e define o cache.
+
+O workflow `.github/workflows/test.yml` roda `npm test` em cada push na `main` e em cada PR.
 
 ## Tecnologias Utilizadas
 - HTML5 para estrutura de conteúdo.
