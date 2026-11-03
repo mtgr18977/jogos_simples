@@ -47,7 +47,10 @@
             button.style.cssText = 'font-size:14px;padding:6px 12px';
             button.title = 'Ligar/desligar som (M)';
             button.addEventListener('click', e => { toggle(); e.currentTarget.blur(); });
-            bar.replaceWith(button);
+            const actions = document.createElement('div');
+            actions.className = 'actions';
+            actions.appendChild(button);
+            bar.replaceWith(actions);
             updateButton();
         }
     });

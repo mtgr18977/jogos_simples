@@ -60,6 +60,9 @@
     // Intervalo de queda em segundos para cada nível (mínimo 60 ms)
     const dropInterval = level => Math.max(60, 1000 * Math.pow(0.85, level - 1)) / 1000;
 
+    // Nível pelo total de linhas: base + 1 a cada `perLevel` linhas
+    const levelFor = (lines, base = 1, perLevel = 10) => base + Math.floor(lines / perLevel);
+
     // Sorteio 7-bag: cada peça aparece exatamente 1x a cada 7. rng devolve [0,1).
     function makeBag(rng = Math.random) {
         let bag = [];
@@ -76,5 +79,5 @@
     }
 
     return { COLS, ROWS, LINE_POINTS, SHAPES, cloneMatrix, rotateCW, rotateCCW,
-             createArena, collides, sweepLines, lineScore, dropInterval, makeBag };
+             createArena, collides, sweepLines, lineScore, dropInterval, levelFor, makeBag };
 });

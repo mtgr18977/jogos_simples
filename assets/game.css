@@ -27,7 +27,7 @@ body {
 
 .topbar {
     width: 100%;
-    max-width: 900px;
+    max-width: 1600px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -43,6 +43,7 @@ body {
 }
 
 .topbar a:hover { background: var(--accent); }
+.topbar .actions { display: flex; gap: 6px; justify-content: flex-end; min-width: 70px; }
 .topbar h1 { margin: 0; font-size: 22px; letter-spacing: 1px; }
 
 .btn {
