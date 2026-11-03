@@ -1,41 +1,49 @@
 # Joguinhos simples
 
-Este repositório contém uma coleção de jogos clássicos desenvolvidos em HTML5 e JavaScript. por enquanto, os jogos incluem Tetris e Pong. A página principal permite ao usuário escolher o jogo e acessar uma seção de ajuda para instruções de cada um.
-Conteúdo
+Este repositório contém uma coleção de jogos clássicos desenvolvidos em HTML5 e JavaScript puro. Os jogos incluem Tetris, Pong, Enduro e Snake. A página principal permite ao usuário escolher o jogo e acessar uma seção de ajuda para instruções de cada um.
 
-- `index.html`: Página inicial onde o usuário pode selecionar o jogo que deseja jogar.
-- `tetris.html`: Tetris com 3 modos (Clássico, Tempo, Desafio), peça guardada, sombra, queda rápida, nível e ranking Top 5 por modo.
-- `pong.html`: Implementação do jogo Pong, onde o usuário pode ajustar a dificuldade e competir contra uma IA.
-- `enduro/`: Enduro (inspirado no Atari 2600) com velocidade, neblina, neve e recorde.
-- `assets/game.css`: estilo compartilhado pelos jogos.
+## Jogos
 
-## Recursos
+| Jogo | Destaques |
+|------|-----------|
+| Tetris | 3 modos (Clássico, Tempo, Desafio), sorteio 7-bag, sombra, queda rápida, peça guardada, ranking Top 5 por modo, partículas ao limpar linhas |
+| Pong | 1 jogador (IA com 3 dificuldades) ou 2 jogadores no mesmo teclado; ângulo da rebatida e aceleração; vitórias/derrotas salvas |
+| Enduro | Velocidade controlável, ultrapassagens, neblina e neve, recorde |
+| Snake | Paredes sólidas ou atravessáveis, aceleração progressiva, recorde por modo |
 
-### Página Inicial (index.html)
-- Interface com estilo moderno.
-- Botões para iniciar cada jogo.
-- Seção de ajuda que explica o objetivo e os controles de cada jogo.
+Todos têm efeitos sonoros (tecla **M** liga/desliga), pausa automática ao trocar de aba e botões de toque no celular.
 
-### Tetris (tetris.html)
-- 3 modos de jogo: Clássico, Tempo e Desafio.
-- Painel lateral com informações de pontuação, nível e ranking.
-- Funcionalidade de ranking de pontuação armazenada localmente.
-- Controles: Setas para mover, Q para rotacionar.
+## Estrutura
 
-### Pong (pong.html)
-- Jogo contra IA com níveis de dificuldade.
-- Placar em tempo real.
-- Controles: Setas para mover a barra e Espaço para pausar.
+```
+index.html            menu e ajuda de cada jogo
+tetris.html/.js       interface do Tetris      ← tetris-logic.js (lógica pura)
+pong.html/.js         interface do Pong        ← pong-logic.js   (lógica pura)
+snake.html/.js        interface do Snake       ← snake-logic.js  (lógica pura)
+enduro/               Enduro (index.html + game.js)
+assets/game.css       estilo compartilhado
+assets/audio.js       efeitos sonoros (Web Audio, sem arquivos)
+tests/                testes automatizados da lógica pura
+```
 
-### Enduro (enduro/game.js)
-- Jogo infinito.
-- Scroller com diversos blocos, você controla o bloco que se mexe.
-- Controles: setas para direita/esquerda para movimentar/desviar dos carros.
+Os arquivos `*-logic.js` não tocam no DOM, por isso rodam tanto no navegador quanto no Node, onde são testados.
 
 ## Como Executar
 - Baixe ou clone o repositório.
-- Abra o arquivo index.html em um navegador compatível.
+- Abra o arquivo index.html em um navegador compatível (ou rode `npm run serve` e acesse http://localhost:8000).
 - Escolha o jogo desejado e divirta-se!
+
+## Testes
+
+```bash
+npm test
+```
+
+Requer Node 20+ (usa o `node:test` nativo, sem instalar nada).
+
+## Publicação
+
+Um workflow do GitHub Actions (`.github/workflows/pages.yml`) roda os testes e publica o site no GitHub Pages a cada push na `main`. Para ativar, vá em *Settings → Pages → Source: GitHub Actions*.
 
 ## Tecnologias Utilizadas
 - HTML5 para estrutura de conteúdo.
@@ -52,11 +60,15 @@ Conteúdo
 | Tetris | Espaço | Queda rápida (2 pontos por célula) |
 | Tetris | C / Shift | Guardar peça |
 | Tetris | P / Esc | Pausar |
-| Pong | ↑ ↓ ou W S | Mover a barra (ou arraste o dedo no celular) |
+| Pong | ↑ ↓ ou W S | Mover a barra (1 jogador) |
+| Pong 2P | W S / ↑ ↓ | Barra da esquerda / da direita |
 | Pong | Espaço / P | Pausar |
 | Enduro | ← → | Desviar |
 | Enduro | ↑ / ↓ | Acelerar / frear |
 | Enduro | Espaço / P | Pausar |
 | Enduro | Enter | Reiniciar |
+| Snake | ← ↑ ↓ → ou WASD | Direção |
+| Snake | Espaço / P | Pausar |
+| Todos | M | Liga/desliga o som |
 
 Os jogos também têm botões de toque em celulares.

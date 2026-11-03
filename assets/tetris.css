@@ -1,0 +1,9 @@
+        #layout { display: flex; gap: 16px; align-items: flex-start; flex-wrap: wrap; justify-content: center; }
+        #side { display: flex; flex-direction: column; gap: 10px; width: 190px; }
+        #side h3 { margin: 0 0 6px; font-size: 14px; color: var(--muted); text-align: center; font-weight: 600; }
+        #side canvas { margin: 0 auto; background: #222; border-width: 1px; }
+        .stat { display: flex; justify-content: space-between; font-size: 16px; padding: 3px 0; }
+        .stat span:first-child { color: var(--muted); }
+        .mode-btn { width: 100%; text-align: left; }
+        .mode-btn small { display: block; font-size: 13px; opacity: .8; }
+        #ov-extra { color: var(--muted); font-size: 14px; }

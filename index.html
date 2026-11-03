@@ -137,8 +137,9 @@
             padding: 5px 10px;
             border-radius: 5px;
             font-style: normal;
-            width: 40px;
+            min-width: 40px;
             text-align: center;
+            white-space: nowrap;
         }
 
         /* Botão de retorno dentro da ajuda */
@@ -197,7 +198,7 @@
 <body>
     <div class="container">
         <h1>Jogos clássicos</h1>
-        <p>Escolha um jogo e divirta-se.</p>
+        <p>Escolha um jogo e divirta-se. Em qualquer jogo, <b>M</b> liga/desliga o som.</p>
         <div class="button-group">
             <!-- Tetris -->
             <div class="game-container">
@@ -249,11 +250,11 @@
                     <p>
                         O objetivo do Pong é simples: manter a bola em movimento e evitar que ela passe pela sua barra. Você compete contra a IA tentando marcar mais pontos do que ela.
                     </p>
-                    <p><strong>Controles:</strong></p>
+                    <p><strong>Controles (1 jogador):</strong></p>
                     <ul>
                         <li><i>↑</i> Mover Barra para Cima</li>
                         <li><i>↓</i> Mover Barra para Baixo</li>
-                        <li><i>W</i>/<i>S</i> Também movem a barra</li>
+                        <li><i>W</i>/<i>S</i> Também movem a barra (no modo 2 jogadores, controlam a barra da esquerda; as setas, a da direita)</li>
                         <li><i>Espaço</i> Pausar/Continuar</li>
                     </ul>
                     <p><strong>Como Jogar:</strong></p>
@@ -306,6 +307,30 @@
                         - <strong>Antecipe os Movimentos dos Outros Carros:</strong> Preste atenção no movimento dos carros à sua frente para evitar acidentes.
                     </p>
                     <button class="close-button" onclick="toggleHelp('enduro-help')">Fechar</button>
+                </div>
+            </div>
+
+            <!-- Snake -->
+            <div class="game-container">
+                <a href="snake.html" class="game-button">Snake</a>
+                <button class="help-button" onclick="toggleHelp('snake-help')">Ajuda Snake</button>
+                <div id="snake-help" class="help-section">
+                    <h2>Ajuda - Snake</h2>
+                    <p><strong>Objetivo do Jogo:</strong></p>
+                    <p>Comer o máximo de maçãs possível. A cobra cresce a cada maçã e o jogo acelera. Você perde ao bater em você mesma ou, com paredes sólidas, na borda do tabuleiro.</p>
+                    <p><strong>Controles:</strong></p>
+                    <ul>
+                        <li><i>←↑↓→</i> Mudar de direção</li>
+                        <li><i>WASD</i> Também muda de direção</li>
+                        <li><i>Espaço</i> Pausar/Continuar</li>
+                        <li><i>Enter</i> Reiniciar</li>
+                    </ul>
+                    <p><strong>Dicas:</strong></p>
+                    <p>
+                        - <strong>Faça curvas largas</strong> quando a cobra estiver grande.<br><br>
+                        - <strong>Paredes atravessáveis</strong> deixam o jogo mais fácil, e têm recorde separado.
+                    </p>
+                    <button class="close-button" onclick="toggleHelp('snake-help')">Fechar</button>
                 </div>
             </div>
         </div>

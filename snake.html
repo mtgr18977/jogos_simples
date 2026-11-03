@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake</title>
+    <link rel="stylesheet" href="assets/game.css">
+</head>
+<body>
+    <div class="topbar">
+        <a href="index.html">← Menu</a>
+        <h1>Snake</h1>
+        <span style="width:70px"></span>
+    </div>
+
+    <div class="stage">
+        <canvas id="snake" width="480" height="480"></canvas>
+        <div class="overlay" id="overlay">
+            <h2 id="ov-title">Snake</h2>
+            <p id="ov-text" style="white-space:pre-line">Coma as maçãs sem bater em você mesma.</p>
+            <label>Paredes
+                <select id="walls">
+                    <option value="solid" selected>Sólidas (batem)</option>
+                    <option value="wrap">Atravessáveis</option>
+                </select>
+            </label>
+            <button class="btn" id="ov-button">Jogar</button>
+            <div class="panel" style="min-width:240px">
+                <table class="data" id="best">
+                    <thead><tr><th>Paredes</th><th>Recorde</th></tr></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="touch-controls" id="touch">
+        <button data-dir="-1,0" aria-label="Esquerda">◀</button>
+        <button data-dir="0,-1" aria-label="Cima">▲</button>
+        <button data-dir="0,1" aria-label="Baixo">▼</button>
+        <button data-dir="1,0" aria-label="Direita">▶</button>
+    </div>
+
+    <p class="hint">
+        <kbd>←</kbd> <kbd>↑</kbd> <kbd>↓</kbd> <kbd>→</kbd> ou <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> · <kbd>Espaço</kbd>/<kbd>P</kbd> pausa · <kbd>Enter</kbd> reinicia · deslize o dedo na tela
+    </p>
+
+    <script src="assets/audio.js"></script>
+    <script src="snake-logic.js"></script>
+    <script src="snake.js"></script>
+</body>
+</html>
