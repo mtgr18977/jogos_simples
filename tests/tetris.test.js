@@ -85,3 +85,15 @@ test('7-bag: cada bloco de 7 peças contém as 7 formas', () => {
         assert.equal(peças, 'IJLOSTZ');
     }
 });
+
+test('levelFor: nível base + 1 a cada N linhas', () => {
+    assert.equal(T.levelFor(0), 1);
+    assert.equal(T.levelFor(9), 1);
+    assert.equal(T.levelFor(10), 2);
+    assert.equal(T.levelFor(0, 10, 5), 10);       // Turbo começa no 10
+    assert.equal(T.levelFor(12, 10, 5), 12);      // e sobe a cada 5 linhas
+});
+
+test('modo Turbo é bem mais rápido que o Clássico desde o início', () => {
+    assert.ok(T.dropInterval(T.levelFor(0, 10, 5)) < T.dropInterval(T.levelFor(0)) / 3);
+});

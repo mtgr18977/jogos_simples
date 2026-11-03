@@ -3,7 +3,9 @@
 
     const canvas = document.getElementById('snake');
     const ctx = canvas.getContext('2d');
-    const COLS = 20, ROWS = 20, CELL = canvas.width / COLS;
+    const LW = canvas.width, LH = canvas.height;     // tamanho lógico (480×480)
+    const COLS = 20, ROWS = 20, CELL = LW / COLS;
+    const fit = Fit.setup(canvas, LW, LH);
 
     const overlay = document.getElementById('overlay');
     const ovTitle = document.getElementById('ov-title');
@@ -136,15 +138,16 @@
     }
 
     function draw() {
+        fit.apply(ctx);
         ctx.fillStyle = '#111';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillRect(0, 0, LW, LH);
         // Tabuleiro quadriculado
         for (let y = 0; y < ROWS; y++)
             for (let x = 0; x < COLS; x++) {
                 ctx.fillStyle = (x + y) % 2 ? '#161b22' : '#1b212a';
                 ctx.fillRect(x * CELL, y * CELL, CELL, CELL);
             }
-        if (!wrap) { ctx.strokeStyle = '#8b949e'; ctx.lineWidth = 2; ctx.strokeRect(1, 1, canvas.width - 2, canvas.height - 2); }
+        if (!wrap) { ctx.strokeStyle = '#8b949e'; ctx.lineWidth = 2; ctx.strokeRect(1, 1, LW - 2, LH - 2); }
 
         if (s.food) {                                   // maçã
             ctx.fillStyle = '#e53935';

@@ -3,7 +3,8 @@
 
     const canvas = document.getElementById('gameCanvas');
     const ctx = canvas.getContext('2d');
-    const W = canvas.width, H = canvas.height;
+    const W = canvas.width, H = canvas.height;     // tamanho lógico (400×600)
+    const fit = Fit.setup(canvas, W, H);
 
     const overlay = document.getElementById('overlay');
     const ovTitle = document.getElementById('ov-title');
@@ -14,10 +15,14 @@
     const ROAD_LEFT = 90, ROAD_RIGHT = W - 90, ROAD_W = ROAD_RIGHT - ROAD_LEFT;
     const LANES = 5, LANE_W = ROAD_W / LANES;
     const CAR_W = 24, CAR_H = 40;
-    const MIN_SPEED = 40, MAX_SPEED = 240;        // km/h
+    // Modos de jogo (velocidades em km/h)
+    const MODES = {
+        normal: { label: 'Normal', min: 40,  max: 240, start: 80,  accel: 40, steer: 230, obsMin: 50, obsVar: 50,  spawn: 1,   key: 'enduroBest' },
+        turbo:  { label: 'Turbo',  min: 120, max: 360, start: 180, accel: 60, steer: 300, obsMin: 90, obsVar: 80,  spawn: 0.7, key: 'enduroBestTurbo' }
+    };
+    let mode = MODES.normal;
     const PX_PER_KMH = 2.2;                       // km/h → pixels por segundo de rolagem
     const STEP = 1 / 120;
-    const BEST_KEY = 'enduroBest';
 
     const CAR_COLORS = ['#e53935', '#1e88e5', '#43a047', '#fdd835', '#8e24aa', '#fb8c00'];
     const WEATHER_LABEL = { clear: 'Limpo', fog: 'Neblina', snow: 'Neve' };
@@ -29,7 +34,13 @@
     let scroll, spawnTimer, passed, distance, speed;
     let weather, weatherTimer, weatherMix;   // weatherMix: 0..1 (intensidade do efeito atual)
     let best = 0;
-    try { best = parseInt(localStorage.getItem(BEST_KEY), 10) || 0; } catch (e) { /* ignora */ }
+    function loadBest() {
+        best = 0;
+        try { best = parseInt(localStorage.getItem(mode.key), 10) || 0; } catch (e) { /* ignora */ }
+    }
+    const modeSelect = document.getElementById('mode');
+    modeSelect.addEventListener('change', () => { mode = MODES[modeSelect.value]; loadBest(); if (state === 'menu') describeMenu(); });
+    loadBest();
 
     function reset() {
         player = { x: W / 2 - CAR_W / 2, y: H - 110, vx: 0 };
@@ -41,7 +52,7 @@
         spawnTimer = 0.6;
         passed = 0;
         distance = 0;
-        speed = 80;
+        speed = mode.start;
         weather = 'clear';
         weatherTimer = 25;
         weatherMix = 0;
@@ -83,6 +94,7 @@
 
     // ---------- Fluxo ----------
     function showOverlay(title, text, button) {
+        modeSelect.parentElement.style.display = state === 'paused' ? 'none' : '';
         ovTitle.textContent = title;
         ovText.textContent = text;
         ovButton.textContent = button;
@@ -110,7 +122,7 @@
         const isRecord = passed > best;
         if (isRecord) {
             best = passed;
-            try { localStorage.setItem(BEST_KEY, String(best)); } catch (e) { /* ignora */ }
+            try { localStorage.setItem(mode.key, String(best)); } catch (e) { /* ignora */ }
         }
         showOverlay('Batida! 💥',
             `Carros ultrapassados: ${passed}\nDistância: ${(distance / 1000).toFixed(1)} km\n` +
@@ -126,7 +138,7 @@
         if (obstacles.some(o => o.lane === lane && o.y < CAR_H * 3)) return;
         obstacles.push({
             lane, x, y: -CAR_H - 10, counted: false,
-            speed: 50 + Math.random() * 50,                        // km/h do carro
+            speed: mode.obsMin + Math.random() * mode.obsVar,                        // km/h do carro
             color: CAR_COLORS[Math.floor(Math.random() * CAR_COLORS.length)]
         });
     }
@@ -153,15 +165,15 @@
         if (state !== 'playing') return;
 
         // Velocidade: ↑ acelera, ↓ freia, senão perde velocidade devagar
-        if (keys.ArrowUp) speed += 40 * dt;
-        else if (keys.ArrowDown) speed -= 140 * dt;
-        else speed -= 15 * dt;
-        speed = Math.max(MIN_SPEED, Math.min(MAX_SPEED, speed));
+        if (keys.ArrowUp) speed += mode.accel * dt;
+        else if (keys.ArrowDown) speed -= mode.accel * 3.5 * dt;
+        else speed -= mode.accel * 0.375 * dt;
+        speed = Math.max(mode.min, Math.min(mode.max, speed));
 
         // Direção: na neve o carro "escorrega" (responde mais devagar)
         const grip = weather === 'snow' ? 1 - 0.6 * weatherMix : 1;
         const dir = (keys.ArrowRight ? 1 : 0) - (keys.ArrowLeft ? 1 : 0);
-        const targetVx = dir * 230;
+        const targetVx = dir * mode.steer;
         player.vx += (targetVx - player.vx) * Math.min(1, 12 * grip * dt);
         player.x += player.vx * dt;
         player.x = Math.max(ROAD_LEFT + 2, Math.min(ROAD_RIGHT - CAR_W - 2, player.x));
@@ -174,7 +186,7 @@
         spawnTimer -= dt;
         if (spawnTimer <= 0) {
             spawnObstacle();
-            spawnTimer = (0.5 + Math.random() * 0.7) * (150 / Math.max(speed, 60));
+            spawnTimer = (0.5 + Math.random() * 0.7) * (150 / Math.max(speed, 60)) * mode.spawn;
         }
         for (const o of obstacles) {
             o.y += (speed - o.speed) * PX_PER_KMH * dt;
@@ -217,6 +229,7 @@
     }
 
     function draw() {
+        fit.apply(ctx);
         // Grama
         ctx.fillStyle = '#2e7d32';
         ctx.fillRect(0, 0, W, H);
@@ -292,6 +305,11 @@
     }
 
     reset();
-    showOverlay('Enduro', 'Ultrapasse o máximo de carros que conseguir.\nCuidado com a neblina e a neve!\n\nRecorde: ' + best, 'Começar');
+    function describeMenu() {
+        showOverlay('Enduro',
+            'Ultrapasse o máximo de carros que conseguir.\nCuidado com a neblina e a neve!\n\n' +
+            `Recorde (${mode.label}): ${best}`, 'Começar');
+    }
+    describeMenu();
     requestAnimationFrame(frame);
 })();

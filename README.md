@@ -6,12 +6,12 @@ Este repositório contém uma coleção de jogos clássicos desenvolvidos em HTM
 
 | Jogo | Destaques |
 |------|-----------|
-| Tetris | 3 modos (Clássico, Tempo, Desafio), sorteio 7-bag, sombra, queda rápida, peça guardada, ranking Top 5 por modo, partículas ao limpar linhas |
+| Tetris | 4 modos (Clássico, Tempo, Turbo, Desafio), sorteio 7-bag, sombra, queda rápida, peça guardada, ranking Top 5 por modo, partículas ao limpar linhas |
 | Pong | 1 jogador (IA com 3 dificuldades) ou 2 jogadores no mesmo teclado; ângulo da rebatida e aceleração; vitórias/derrotas salvas |
-| Enduro | Velocidade controlável, ultrapassagens, neblina e neve, recorde |
+| Enduro | Modos Normal e Turbo, velocidade controlável, ultrapassagens, neblina e neve, recorde |
 | Snake | Paredes sólidas ou atravessáveis, aceleração progressiva, recorde por modo |
 
-Todos têm efeitos sonoros (tecla **M** liga/desliga), pausa automática ao trocar de aba e botões de toque no celular.
+A área de jogo se ajusta ao tamanho da janela (nítida em telas HiDPI) e a tecla **F** abre a tela cheia. Todos têm efeitos sonoros (tecla **M** liga/desliga), pausa automática ao trocar de aba e botões de toque no celular.
 
 ## Estrutura
 
@@ -23,6 +23,7 @@ snake.html/.js        interface do Snake       ← snake-logic.js  (lógica pura
 enduro/               Enduro (index.html + game.js)
 assets/game.css       estilo compartilhado
 assets/audio.js       efeitos sonoros (Web Audio, sem arquivos)
+assets/fit.js         ajusta o canvas à janela e tela cheia
 tests/                testes automatizados da lógica pura
 ```
 
@@ -43,7 +44,9 @@ Requer Node 20+ (usa o `node:test` nativo, sem instalar nada).
 
 ## Publicação
 
-Um workflow do GitHub Actions (`.github/workflows/pages.yml`) roda os testes e publica o site no GitHub Pages a cada push na `main`. Para ativar, vá em *Settings → Pages → Source: GitHub Actions*.
+O site é publicado no **Netlify**, que gera um novo deploy a cada push na `main` (e um link de prévia para cada PR). Não há etapa de build: o `netlify.toml` apenas indica a raiz do repositório como pasta publicada e define o cache.
+
+O workflow `.github/workflows/test.yml` roda `npm test` em cada push na `main` e em cada PR.
 
 ## Tecnologias Utilizadas
 - HTML5 para estrutura de conteúdo.
@@ -70,5 +73,6 @@ Um workflow do GitHub Actions (`.github/workflows/pages.yml`) roda os testes e p
 | Snake | ← ↑ ↓ → ou WASD | Direção |
 | Snake | Espaço / P | Pausar |
 | Todos | M | Liga/desliga o som |
+| Todos | F | Tela cheia |
 
 Os jogos também têm botões de toque em celulares.

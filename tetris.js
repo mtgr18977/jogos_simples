@@ -10,12 +10,24 @@
 
         // ---------- Constantes ----------
         const { COLS, ROWS, SHAPES, cloneMatrix, rotateCW, rotateCCW, createArena,
-                collides: collidesIn, sweepLines, lineScore, dropInterval: dropIntervalFor, makeBag } = TetrisLogic;
+                collides: collidesIn, sweepLines, lineScore, dropInterval: dropIntervalFor, levelFor, makeBag } = TetrisLogic;
         const CELL = 24;
+        const LW = COLS * CELL, LH = ROWS * CELL;      // tamanho lógico do tabuleiro (240×480)
+        const fit = Fit.setup(canvas, LW, LH, {
+            // 230 = painel lateral + espaço; em telas estreitas o painel vai para baixo do tabuleiro
+            extraW: () => (window.innerWidth < 640 ? 0 : 230)
+        });
         const TIME_LIMIT = 120;        // segundos (modo Tempo)
         const CHALLENGE_GOAL = 20;     // linhas (modo Desafio)
         const CHALLENGE_GARBAGE = 8;   // linhas de lixo iniciais
-        const MODE_NAMES = { classic: 'Clássico', time: 'Tempo', challenge: 'Desafio' };
+        const MODE_NAMES = { classic: 'Clássico', time: 'Tempo', challenge: 'Desafio', turbo: 'Turbo' };
+        // baseLevel: nível inicial · perLevel: linhas necessárias para subir de nível
+        const MODE_RULES = {
+            classic:   { baseLevel: 1,  perLevel: 10 },
+            time:      { baseLevel: 1,  perLevel: 10 },
+            challenge: { baseLevel: 3,  perLevel: 10 },
+            turbo:     { baseLevel: 10, perLevel: 5 }      // começa rápido e acelera depressa
+        };
         const COLORS = [null, '#00e5ee', '#3b5bff', '#ff9f1a', '#ffd400', '#2ecc40', '#b455f0', '#ff3b3b'];
 
         let nextType = makeBag();
@@ -125,7 +137,7 @@
                 Sfx.clear(cleared);
                 g.score += lineScore(cleared, g.level);
                 g.lines += cleared;
-                g.level = g.baseLevel + Math.floor(g.lines / 10);
+                g.level = levelFor(g.lines, g.baseLevel, MODE_RULES[g.mode].perLevel);
             }
 
             if (g.mode === 'challenge' && g.lines >= CHALLENGE_GOAL) {
@@ -154,7 +166,7 @@
             g.mode = mode;
             g.arena = createArena();
             g.score = 0; g.lines = 0;
-            g.baseLevel = mode === 'challenge' ? 3 : 1;
+            g.baseLevel = MODE_RULES[mode].baseLevel;
             g.level = g.baseLevel;
             g.elapsed = 0;
             g.hold = null;
@@ -327,15 +339,16 @@
         }
 
         function draw() {
+            fit.apply(ctx);
             ctx.fillStyle = '#111';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillRect(0, 0, LW, LH);
 
             // Grade discreta
             ctx.strokeStyle = 'rgba(255,255,255,.05)';
             ctx.lineWidth = 1;
             ctx.beginPath();
-            for (let x = 1; x < COLS; x++) { ctx.moveTo(x * CELL, 0); ctx.lineTo(x * CELL, canvas.height); }
-            for (let y = 1; y < ROWS; y++) { ctx.moveTo(0, y * CELL); ctx.lineTo(canvas.width, y * CELL); }
+            for (let x = 1; x < COLS; x++) { ctx.moveTo(x * CELL, 0); ctx.lineTo(x * CELL, LH); }
+            for (let y = 1; y < ROWS; y++) { ctx.moveTo(0, y * CELL); ctx.lineTo(LW, y * CELL); }
             ctx.stroke();
 
             g.arena.forEach((row, y) => row.forEach((v, x) => {

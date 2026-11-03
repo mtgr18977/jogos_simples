@@ -19,6 +19,12 @@
             <h2 id="ov-title">Enduro</h2>
             <p id="ov-text" style="white-space:pre-line">Ultrapasse o máximo de carros que conseguir.
 Cuidado com a neblina e a neve!</p>
+            <label>Modo
+                <select id="mode">
+                    <option value="normal" selected>Normal</option>
+                    <option value="turbo">Turbo (muito mais rápido)</option>
+                </select>
+            </label>
             <button class="btn" id="ov-button">Começar</button>
         </div>
     </div>
@@ -35,6 +41,8 @@ Cuidado com a neblina e a neve!</p>
         <kbd>Espaço</kbd>/<kbd>P</kbd> pausar · <kbd>Enter</kbd> reiniciar
     </p>
 
+    <script src="../assets/audio.js"></script>
+    <script src="../assets/fit.js"></script>
     <script src="game.js"></script>
 </body>
 </html>

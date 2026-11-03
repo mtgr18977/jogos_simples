@@ -3,7 +3,8 @@
 
         const canvas = document.getElementById('pong');
         const ctx = canvas.getContext('2d');
-        const W = canvas.width, H = canvas.height;
+        const W = canvas.width, H = canvas.height;     // tamanho lógico (800×500)
+        const fit = Fit.setup(canvas, W, H);
 
         const overlay = document.getElementById('overlay');
         const ovTitle = document.getElementById('ov-title');
@@ -288,6 +289,7 @@
 
         // ---------- Desenho ----------
         function draw() {
+            fit.apply(ctx);
             ctx.fillStyle = '#000';
             ctx.fillRect(0, 0, W, H);
 

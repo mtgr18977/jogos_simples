@@ -1,0 +1,26 @@
+# Site estático: não há etapa de build. O Netlify publica a raiz do repositório.
+[build]
+  publish = "."
+
+# Páginas HTML sempre revalidadas (atualizações aparecem na hora);
+# scripts e estilos podem ficar em cache por pouco tempo.
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=300"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=300"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
